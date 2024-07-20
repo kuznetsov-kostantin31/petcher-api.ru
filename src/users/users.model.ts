@@ -32,6 +32,14 @@ export class User extends Model<User, UserCreationAttrs>{
     @Column({type: DataType.STRING, allowNull: false})
     password: string;
 
+    @ApiProperty({example: 'Люблю веб-дизайн, 17 лет', description: 'Описание профиля'})
+    @Column({type: DataType.STRING, unique: true, allowNull: false})
+    description: string;
+
+    @ApiProperty({example: '*картиночка*', description: 'Аватарка'})
+    @Column({type: DataType.STRING, unique: true, allowNull: false})
+    url: string;
+
     @ApiProperty({example: 'true', description: 'Забанен или нет'})
     @Column({type: DataType.BOOLEAN, defaultValue: false})
     banned: boolean;

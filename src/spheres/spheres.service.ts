@@ -11,4 +11,8 @@ export class SpheresService {
         const sphere = await this.sphereRepository.create(dto)
         return sphere
     }
+    async getSphereByValue(value: string){
+        const sphere = await this.sphereRepository.findOne({where:{value}})
+        return sphere
+    }
 }

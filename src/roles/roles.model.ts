@@ -1,12 +1,12 @@
-import {Column, DataType, Table, Model, BelongsToMany} from "sequelize-typescript";
+import {Column, DataType, Table, Model, BelongsToMany, ForeignKey, BelongsTo} from "sequelize-typescript";
 import {ApiProduces, ApiProperty} from "@nestjs/swagger";
 import {User} from "../users/users.model";
 import {UserRoles} from "./user-roles.model";
+import {Sphere} from "../spheres/spheres.model";
 
 
 interface RoleCreationAttrs{
     value: string;
-    description: string;
 }
 @Table({tableName: 'roles'})
 export class Role extends Model<Role, RoleCreationAttrs>{
@@ -18,9 +18,13 @@ export class Role extends Model<Role, RoleCreationAttrs>{
     @Column({type: DataType.STRING, unique: true, allowNull: false})
     value: string;
 
-    @ApiProperty({example: 'Администратор', description: 'Описание роли'})
-    @Column({type: DataType.STRING, allowNull: false})
-    description: string;
+    @ForeignKey(() => Sphere)
+    @ApiProperty({example: '1', description: 'Уникальный айди сферы'})
+    @Column({type: DataType.NUMBER, allowNull: false})
+    sphereId: number;
+
+    @BelongsTo(() => Sphere)
+    sphere: Sphere;
 
     @BelongsToMany(() => User, () => UserRoles)
     users: User[]
