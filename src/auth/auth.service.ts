@@ -3,8 +3,8 @@ import {CreateUserDto} from "../users/dto/create-user.dto";
 import {UsersService} from "../users/users.service";
 import {JwtService} from "@nestjs/jwt";
 import * as bcrypt from 'bcryptjs'
-import {User} from "../users/users.model";
 import {AuthLoginUser} from "../users/dto/login-user";
+import {User} from "@prisma/client";
 
 @Injectable()
 export class AuthService {
@@ -27,7 +27,7 @@ export class AuthService {
     }
 
     private async generateToken(user: User){
-        const payload = {email: user.email, id: user.id, roles: user.roles}
+        const payload = {email: user.email, id: user.id}
         return{
             token: this.jwtService.sign(payload)
         }

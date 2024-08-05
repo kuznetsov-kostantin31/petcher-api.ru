@@ -20,4 +20,13 @@ export class CreateUserDto{
     @IsString({message: 'Должно быть строкой'})
     @Length(4, 16, {message: 'Не меньше 4 и не больше 16 символов'})
     readonly password: string;
+
+    @ApiProperty({example: 'Люблю веб-дизайн, 17 лет', description: 'Описание профиля'})
+    @IsString({message: 'Должно быть строкой'})
+    @Length(0, 150, {message: 'Не больше 150 символов'})
+    readonly description: string;
+
+    @ApiProperty({example: '*картиночка*', description: 'Аватарка'})
+    @IsString({message: 'Должно быть строкой'})
+    readonly url: string;
 }

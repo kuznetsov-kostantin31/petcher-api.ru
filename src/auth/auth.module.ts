@@ -15,7 +15,7 @@ import * as process from "process";
         signOptions:{
           expiresIn: '24h'
         }
-      })
+      }),
   ],
     exports: [
         AuthService,

@@ -1,18 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import {InjectModel} from "@nestjs/sequelize";
-import {Platform} from "./platforms.model";
+import {Injectable} from '@nestjs/common';
 import {CreatePlatformDto} from "./dto/create-platform";
+import {PrismaService} from "../database/prisma.service";
 
 @Injectable()
 export class PlatformsService {
-    constructor(@InjectModel(Platform) private platformRepository: typeof Platform) {}
+    constructor(private prisma: PrismaService) {}
 
     async createPlatform(dto: CreatePlatformDto){
-        const platform = await this.platformRepository.create(dto)
-        return platform;
+        return this.prisma.platform.create({data: dto});
     }
     async getAllPlatforms(){
-        const platforms = await this.platformRepository.findAll({include: {all: true}});
-        return platforms;
+        return this.prisma.platform.findMany();
     }
 }
