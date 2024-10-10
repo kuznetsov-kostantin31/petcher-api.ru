@@ -14,12 +14,7 @@ RUN npx prisma generate
 
 COPY . .
 
-RUN npm run build
-
-FROM node:20
-
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package*.json ./
+COPY ./dist ./dist
 
 EXPOSE 7000
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start"]
