@@ -23,4 +23,4 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
 
 EXPOSE 7000
-RUN node dist/main.js
+CMD node dist/main.js
