@@ -22,4 +22,4 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 
 EXPOSE 7000
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:dev"]
