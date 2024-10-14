@@ -9,8 +9,6 @@ COPY prisma ./prisma/
 
 # Install app dependencies
 RUN npm install
-# Generate prisma client, leave out if generating in `postinstall` script
-RUN npx prisma generate
 
 COPY . .
 
@@ -22,5 +20,5 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
 
-EXPOSE 7000
-CMD ["node" "dist/main.js"]
+EXPOSE 3000
+CMD [ "npm", "run", "start:prod" ]
